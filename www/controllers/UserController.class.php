@@ -1,7 +1,9 @@
 <?php
-namespace HotelFactory\controllers;
-use HotelFactory\core\View;
-use HotelFactory\models\User;
+namespace HotelFactory\Controllers;
+use HotelFactory\Core\Validator;
+use HotelFactory\Core\View;
+use HotelFactory\Managers\UserManager;
+use HotelFactory\Models\User;
 
 class UserController
 {
@@ -38,10 +40,10 @@ class UserController
             $errors = Validator::checkForm($configFormUser ,$_POST);
             //Insertion ou erreurs
             //print_r($errors);
-            $user = new user();
-            $user->hydrate($_POST);
-            $user->save();
         }
+        $user = new UserManager();
+        $user->hydrate($_POST);
+        $user->save();
         //Insertion d'un user
 
         // $user->setFirstname($_POST['firstname']);

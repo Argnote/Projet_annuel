@@ -1,5 +1,7 @@
 <?php
-namespace Projet_annuel\controllers;
+namespace HotelFactory\Controllers;
+
+use HotelFactory\Core\View;
 
 class DefaultController
 {

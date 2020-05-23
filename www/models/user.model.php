@@ -1,8 +1,8 @@
 <?php
-namespace HotelFactory\models;
-use HotelFactory\core\Db;
+namespace HotelFactory\Models;
+use HotelFactory\Core\helpers;
 
-class user extends Db
+class User extends Model
 {
     protected $id;
     protected $email;
@@ -17,7 +17,7 @@ class user extends Db
 
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct(Model::class, 'Models');
     }
 
     public function setId($id)
@@ -61,7 +61,7 @@ class user extends Db
         return [
                     "config"=>[
                         "method"=>"POST", 
-                        "action"=>helpers::getUrl("user", "register"),
+                        "action"=>Helpers::getUrl("user", "register"),
                         "class"=>"user",
                         "id"=>"formRegisterUser",
                         "submit"=>"S'inscrire"
