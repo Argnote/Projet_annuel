@@ -63,9 +63,34 @@ class Manager
     {
     }
 
-    public function findBy(array $params, array $order)
+    public function findBy(array $params, array $order = null): ?array
     {
+        $results = array();
+        $sql = "SELECT * FROM $this->table WHERE";
+        foreach ($params as $key => $value)
+        {
+            if(is_string($value))
+                $comparator = 'LIKE';
+            else
+                $comparator = '=';
+            $sql .="$key $comparator :$key and";
+            $params[":$key"] = $value;
+            unset($params[$key]);
+        }
+        $sql = rtrim($sql, 'and');
+        if($order)
+        {
+            $sql .= "ORDER BY ". key($order)." ". $order[$key($order)];
+        }
+        $result = $this -> sql($sql, $params);
+        $rows = $result -> fetchAll();
 
+        foreach($rows as $row)
+        {
+            $object = new $this->class();
+            array_push($result, $object->hydrate($row));
+        }
+        return $results;
     }
 
     public function count(array $params)
